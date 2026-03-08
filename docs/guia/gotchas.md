@@ -1,3 +1,11 @@
+---
+tags:
+  - Backend
+  - Frontend
+  - DevOps
+  - Gotchas
+---
+
 # Gotchas e Armadilhas
 
 Lições aprendidas durante o desenvolvimento do EnerSync.

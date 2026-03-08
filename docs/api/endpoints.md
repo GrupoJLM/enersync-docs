@@ -1,3 +1,9 @@
+---
+tags:
+  - Backend
+  - API
+---
+
 # Backend — Endpoints
 
 ## Visão Geral

@@ -1,3 +1,11 @@
+---
+tags:
+  - Arquitetura
+  - Backend
+  - Frontend
+  - Mobile
+---
+
 # Estrutura de Arquivos
 
 ## Backend (`enersync-api/`)

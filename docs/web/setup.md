@@ -1,3 +1,9 @@
+---
+tags:
+  - Frontend
+  - Setup
+---
+
 # Frontend — Setup
 
 ## Pré-requisitos

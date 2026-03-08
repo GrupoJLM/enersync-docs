@@ -75,6 +75,7 @@ markdown_extensions:
 plugins:
   - search:
       lang: pt
+  - tags
 
 nav:
   - Início: index.md
@@ -90,11 +91,13 @@ nav:
     - Setup: api/setup.md
     - Padrões de Código: api/padroes.md
     - Endpoints: api/endpoints.md
+    - Exemplos Request/Response: api/exemplos.md
     - Testes: api/testes.md
   - Frontend (Web):
     - Setup: web/setup.md
     - Padrões de Código: web/padroes.md
     - Páginas: web/paginas.md
+    - Screenshots: web/screenshots.md
   - Mobile:
     - Setup: mobile/setup.md
   - Guia de Desenvolvimento:
@@ -102,3 +105,5 @@ nav:
     - Deploy: guia/deploy.md
     - Gotchas: guia/gotchas.md
   - Roadmap: roadmap.md
+  - Changelog: changelog.md
+  - Tags: tags.md

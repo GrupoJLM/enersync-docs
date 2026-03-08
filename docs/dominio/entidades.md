@@ -1,3 +1,10 @@
+---
+tags:
+  - Domínio
+  - Backend
+  - Banco de Dados
+---
+
 # Entidades e Relacionamentos
 
 ## Diagrama

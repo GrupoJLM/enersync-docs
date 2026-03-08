@@ -1,3 +1,9 @@
+---
+tags:
+  - Frontend
+  - Padrões
+---
+
 # Frontend — Padrões de Código
 
 ## Hooks (TanStack Query)

@@ -1,3 +1,9 @@
+---
+tags:
+  - Mobile
+  - Setup
+---
+
 # Mobile — Setup
 
 ## Pré-requisitos

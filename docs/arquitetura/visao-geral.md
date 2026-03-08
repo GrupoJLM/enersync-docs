@@ -1,3 +1,11 @@
+---
+tags:
+  - Arquitetura
+  - Backend
+  - Frontend
+  - DevOps
+---
+
 # Arquitetura — Visão Geral
 
 ## Diagrama de Componentes

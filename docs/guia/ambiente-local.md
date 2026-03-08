@@ -1,3 +1,9 @@
+---
+tags:
+  - Setup
+  - DevOps
+---
+
 # Ambiente Local
 
 ## Pré-requisitos Globais

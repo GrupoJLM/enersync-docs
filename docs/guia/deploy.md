@@ -1,3 +1,9 @@
+---
+tags:
+  - DevOps
+  - Docker
+---
+
 # Deploy
 
 ## Arquitetura de Produção

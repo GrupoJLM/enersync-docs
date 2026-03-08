@@ -1,3 +1,9 @@
+---
+tags:
+  - Backend
+  - Setup
+---
+
 # Backend — Setup
 
 ## Pré-requisitos

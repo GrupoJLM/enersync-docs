@@ -1,3 +1,10 @@
+---
+tags:
+  - Backend
+  - Banco de Dados
+  - Arquitetura
+---
+
 # Banco de Dados
 
 ## PostgreSQL 16 com RLS

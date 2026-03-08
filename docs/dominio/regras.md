@@ -1,3 +1,10 @@
+---
+tags:
+  - Domínio
+  - GD
+  - Backend
+---
+
 # Regras de Negócio
 
 ## Regras Gerais

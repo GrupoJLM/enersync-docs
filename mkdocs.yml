@@ -1,0 +1,104 @@
+site_name: EnerSync Docs
+site_description: Documentação da plataforma EnerSync — Gestão de Geração Distribuída de Energia
+site_author: Grupo JLM
+site_url: https://grupojlm.github.io/enersync-docs/
+
+repo_name: GrupoJLM/enersync-docs
+repo_url: https://github.com/GrupoJLM/enersync-docs
+
+theme:
+  name: material
+  language: pt-BR
+  palette:
+    - scheme: default
+      primary: green
+      accent: light green
+      toggle:
+        icon: material/brightness-7
+        name: Modo escuro
+    - scheme: slate
+      primary: green
+      accent: light green
+      toggle:
+        icon: material/brightness-4
+        name: Modo claro
+  font:
+    text: Inter
+    code: JetBrains Mono
+  features:
+    - navigation.instant
+    - navigation.tracking
+    - navigation.tabs
+    - navigation.sections
+    - navigation.expand
+    - navigation.top
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+    - content.tabs.link
+    - toc.follow
+  icon:
+    repo: fontawesome/brands/github
+    logo: material/lightning-bolt
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/GrupoJLM
+
+copyright: "&copy; 2025-2026 Grupo JLM. Todos os direitos reservados."
+
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.mark
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - attr_list
+  - md_in_html
+  - tables
+  - toc:
+      permalink: true
+
+plugins:
+  - search:
+      lang: pt
+
+nav:
+  - Início: index.md
+  - Domínio GD:
+    - Visão Geral: dominio/visao-geral.md
+    - Entidades: dominio/entidades.md
+    - Regras de Negócio: dominio/regras.md
+  - Arquitetura:
+    - Visão Geral: arquitetura/visao-geral.md
+    - Estrutura de Arquivos: arquitetura/estrutura.md
+    - Banco de Dados: arquitetura/banco-de-dados.md
+  - Backend (API):
+    - Setup: api/setup.md
+    - Padrões de Código: api/padroes.md
+    - Endpoints: api/endpoints.md
+    - Testes: api/testes.md
+  - Frontend (Web):
+    - Setup: web/setup.md
+    - Padrões de Código: web/padroes.md
+    - Páginas: web/paginas.md
+  - Mobile:
+    - Setup: mobile/setup.md
+  - Guia de Desenvolvimento:
+    - Ambiente Local: guia/ambiente-local.md
+    - Deploy: guia/deploy.md
+    - Gotchas: guia/gotchas.md
+  - Roadmap: roadmap.md

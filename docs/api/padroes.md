@@ -92,6 +92,63 @@ CurrentUser = Annotated[User, Depends(get_current_user)]
 - `get_current_user` faz `SET LOCAL` RLS via f-string (asyncpg não suporta bind params em SET)
 - `require_permission("codename")` — dependency para RBAC
 
+## Webhooks (HMAC-SHA256)
+
+- Model `Webhook` com `url`, `secret`, `events[]`, `is_active`
+- Dispatch: ao criar/atualizar/deletar entidades, envia POST para URLs registradas
+- Assinatura: header `X-Webhook-Signature` com HMAC-SHA256 do body usando o `secret` do webhook
+- Payload inclui: `event`, `timestamp`, `data` (entidade serializada)
+- Retry: não implementado (fire-and-forget no momento)
+
+```python
+import hmac, hashlib
+
+signature = hmac.new(
+    webhook.secret.encode(),
+    payload_bytes,
+    hashlib.sha256,
+).hexdigest()
+# Header: X-Webhook-Signature: sha256={signature}
+```
+
+## Rate Limiting (slowapi)
+
+- Usa `slowapi` com storage em memória (default)
+- Limites aplicados nos endpoints de auth:
+    - `POST /auth/login` — 5 requests/minuto
+    - `POST /auth/register` — 3 requests/minuto
+    - `POST /auth/refresh` — 30 requests/minuto
+- Retorna `429 Too Many Requests` quando excedido
+
+```python
+from slowapi import Limiter
+from slowapi.util import get_remote_address
+
+limiter = Limiter(key_func=get_remote_address)
+
+@router.post("/login")
+@limiter.limit("5/minute")
+async def login(request: Request, ...):
+    ...
+```
+
+## Email Tasks
+
+- Tarefas de email registradas no task registry
+- `send_monthly_report`: gera e envia relatório mensal de economia por tenant
+- Template Jinja2 (`monthly_report.html`) com dados de economia consolidados
+- Execução via `POST /tasks/run/send_monthly_report` (ADMIN only)
+- Usa `aiosmtplib` com config SMTP do tenant
+
+```python
+@task_registry.register("send_monthly_report")
+async def send_monthly_report(session: AsyncSession, tenant_id: UUID):
+    # Coleta dados de economia do mês anterior
+    # Renderiza template Jinja2
+    # Envia via aiosmtplib com SMTP config do tenant
+    ...
+```
+
 ## Lint (Ruff)
 
 - Target: `py312`, line-length: `100`

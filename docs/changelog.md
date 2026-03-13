@@ -9,6 +9,142 @@ Registro de todas as mudanças significativas do projeto EnerSync, organizadas p
 
 ---
 
+## [Fase 35.1] — Melhorias de Robustez
+
+**242 testes** | Março 2026
+
+### Adicionado
+- Rate limiting em auth endpoints (slowapi): 5/min login, 3/min register, 30/min refresh
+- Webhook system: model + schema + service + router com HMAC-SHA256 signed payloads, dispatch into CRUD operations
+- Webhook migration com RLS policy
+- Monthly economy report email task (`send_monthly_report`) com template Jinja2
+- Frontend: Vitest setup com unit tests (utils + hooks)
+- Webhook management UI no frontend
+- Performance indexes em tabelas faturas, creditos, contratos
+
+---
+
+## [Fase 35] — App Mobile Flutter
+
+**225 testes** | Março 2026
+
+### Adicionado
+- App Flutter (enersync-mobile): login + dashboard
+- State management com Riverpod
+- Navegação com GoRouter
+- HTTP client com Dio + Flutter Secure Storage para JWT
+- Tela de login com validação
+- Dashboard com KPIs do backend
+
+---
+
+## [Fase 34] — Sistema de Email
+
+**225 testes** | Março 2026
+
+### Adicionado
+- aiosmtplib para envio assíncrono de emails
+- Jinja2 templates para emails (invoice, welcome)
+- Configuração SMTP por tenant (cada tenant com suas credenciais)
+- Emails de fatura e boas-vindas automatizados
+
+---
+
+## [Fase 33] — Tarefas Agendadas
+
+**218 testes** | Março 2026
+
+### Adicionado
+- Task registry pattern para registro de tarefas
+- Endpoint `POST /tasks/run/{task_name}` para execução manual
+- Task history (histórico de execuções)
+- Frontend: página `/tarefas` com cards por task
+
+---
+
+## [Fase 32] — Relatórios Avançados
+
+**216 testes** | Março 2026
+
+### Adicionado
+- Relatório financeiro com resumo por UC
+- Filtros por período (date range)
+- Exportação de relatórios em PDF (fpdf2)
+- Frontend: página `/relatorios` com filtros + export buttons
+
+---
+
+## [Fase 31] — Sistema de Notificações In-App
+
+**211 testes** | Março 2026
+
+### Adicionado
+- Notificações in-app (crédito expirando, fatura atrasada, contrato vencendo)
+- Status read/unread por notificação
+- Bulk mark as read (marcar múltiplas como lidas)
+- Frontend: página `/notificacoes` com listagem + ações em lote
+
+---
+
+## [Fase 30] — Marketplace
+
+**206 testes** | Março 2026
+
+### Adicionado
+- Catálogo de equipamentos solares
+- Categorias de equipamentos
+- Sistema de favoritos por usuário
+- `GET /marketplace/offers`, `POST /marketplace/simulate`
+- Frontend: página `/marketplace` com cards + dialog simulação
+
+---
+
+## [Fase 29] — Compliance / LGPD
+
+**200 testes** | Março 2026
+
+### Adicionado
+- Audit log completo para conformidade LGPD
+- Exportação de dados pessoais do titular (`GET /compliance/export`)
+- Anonimização de dados sob demanda
+- Endpoints: `GET /compliance/check`, `/quotas`, `/credits-expiration`
+
+---
+
+## [Fase 28] — Health Check
+
+**194 testes** | Março 2026
+
+### Adicionado
+- Endpoint `GET /api/health` com verificação de conectividade do banco
+- Retorna: status, db_status, version, uptime_seconds, python_version
+
+---
+
+## [Fase 27] — Performance Indexes
+
+**194 testes** | Março 2026
+
+### Adicionado
+- Indexes compostos nas tabelas `faturas`, `creditos`, `contratos`
+- Migration com 8 composite indexes para queries comuns
+- Melhoria significativa em queries de listagem com filtros
+
+---
+
+## [Fase 26] — Microserviço de Cobrança (PIX/Boleto)
+
+**PENDENTE** | Repositórios separados: `cobranca-service` + `cobranca-web`
+
+### Planejado
+- Microserviço compartilhado (EnerSync, TepConfina, BrandBrain, LegalTech)
+- Providers: Efi (Gerencianet) como primário, Santander PJ como secundário
+- PIX Cobrança (QR code dinâmico) + boleto registrado
+- mTLS + OAuth2 (spec BACEN PIX)
+- Frontend admin: dashboard financeiro, cobrança, conciliação
+
+---
+
 ## [Fase 25] — Internacionalização (i18n)
 
 **179 testes** | Março 2026

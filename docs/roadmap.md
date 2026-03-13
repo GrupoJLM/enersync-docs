@@ -1,13 +1,13 @@
 # Roadmap
 
-Todas as **25 fases** do EnerSync foram concluídas com sucesso.
+**35 fases** do EnerSync foram concluídas (+ 1 pendente: microserviço externo).
 
 ## Resumo
 
-- :test_tube: **179 testes** backend passando
+- :test_tube: **242 testes** backend passando
 - :shield: **44 permissões** RBAC (3 roles)
-- :rocket: **25 fases** implementadas
-- :package: Stack completa: Auth, RBAC, CRUD, Otimizador, Faturamento, Audit, Notificações, Dashboard, Import/Export, Filtros, PDF, Email, Cron, Onboarding, Observabilidade, Bulk, i18n
+- :rocket: **35 fases** implementadas (26 pendente — escopo externo)
+- :package: Stack completa: Auth, RBAC, CRUD, Otimizador, Faturamento, Audit, Notificações, Dashboard, Import/Export, Filtros, PDF, Email, Cron, Onboarding, Observabilidade, Bulk, i18n, Portal, Simulador, Integrações, Geração, Aprovações, Push, Marketplace, Compliance, Webhooks, Rate Limiting, Mobile Flutter
 
 ---
 
@@ -87,3 +87,36 @@ Bulk update faturamento + notificações. DataTable com checkbox selection. **17
 
 ### Fase 25: Internacionalização (i18n) :white_check_mark:
 react-intl frontend + t() backend. pt-BR/en-US. Seletor de idioma. **179 testes**.
+
+### Fase 26: Microserviço de Cobrança :hourglass:
+**PENDENTE** — Repositórios separados (cobranca-service + cobranca-web). PIX/Boleto com Efi + Santander PJ.
+
+### Fase 27: Performance Indexes :white_check_mark:
+Indexes compostos em faturas, creditos, contratos. 8 composite indexes para queries comuns. **194 testes**.
+
+### Fase 28: Health Check :white_check_mark:
+Endpoint GET /api/health com verificação de DB. Retorna status, version, uptime. **194 testes**.
+
+### Fase 29: Compliance / LGPD :white_check_mark:
+Audit log para LGPD. Exportação de dados pessoais. Anonimização sob demanda. **200 testes**.
+
+### Fase 30: Marketplace :white_check_mark:
+Equipamentos solares, categorias, favoritos. GET /marketplace/offers + POST /marketplace/simulate. **206 testes**.
+
+### Fase 31: Sistema de Notificações In-App :white_check_mark:
+Notificações in-app com read/unread. Bulk mark as read. **211 testes**.
+
+### Fase 32: Relatórios Avançados :white_check_mark:
+Resumo financeiro por UC. Filtros por período. Exportação PDF. **216 testes**.
+
+### Fase 33: Tarefas Agendadas :white_check_mark:
+Task registry. Endpoint run. Task history. **218 testes**.
+
+### Fase 34: Sistema de Email :white_check_mark:
+aiosmtplib + Jinja2 templates. SMTP por tenant. Emails de fatura e boas-vindas. **225 testes**.
+
+### Fase 35: App Mobile Flutter :white_check_mark:
+Flutter app (login + dashboard). Riverpod, GoRouter, Dio. **225 testes**.
+
+### Fase 35.1: Melhorias de Robustez :white_check_mark:
+Rate limiting (slowapi). Webhook system (HMAC-SHA256). Performance indexes. Monthly report task. Frontend Vitest. Webhook management UI. **242 testes**.

@@ -8,7 +8,7 @@ tags:
 
 ## Visão Geral
 
-A API possui **17 routers** com **46+ endpoints**, todos sob o prefixo `/api`.
+A API possui **25+ routers** com **80+ endpoints**, todos sob o prefixo `/api`.
 
 Documentação interativa disponível em `/docs` (Swagger) e `/redoc`.
 
@@ -171,3 +171,92 @@ Documentação interativa disponível em `/docs` (Swagger) e `/redoc`.
 |--------|----------|-----------|
 | GET | `/tasks` | `tasks.view` |
 | POST | `/tasks/run/{task_name}` | `tasks.execute` |
+
+## Portal do Cliente
+
+Acesso read-only para titulares de UC via magic link (JWT portal).
+
+| Método | Endpoint | Descrição | Auth |
+|--------|----------|-----------|------|
+| POST | `/portal/auth/exchange` | Trocar token por JWT portal | Token |
+| GET | `/portal/me` | Dados da UC logada | JWT Portal |
+| GET | `/portal/dashboard` | Dashboard da UC | JWT Portal |
+| GET | `/portal/faturas` | Faturas da distribuidora | JWT Portal |
+| GET | `/portal/faturas-internas` | Faturas internas (cobrança) | JWT Portal |
+| GET | `/portal/faturas-internas/{id}/pdf` | PDF da fatura interna | JWT Portal |
+| GET | `/portal/creditos` | Créditos de energia | JWT Portal |
+| GET | `/portal/contrato` | Contrato ativo | JWT Portal |
+
+### Admin — Tokens de Portal
+
+| Método | Endpoint | Permissão |
+|--------|----------|-----------|
+| POST | `/ucs/{uc_id}/portal-token` | `ucs.update` |
+| DELETE | `/ucs/{uc_id}/portal-token` | `ucs.update` |
+
+## Simulador
+
+| Método | Endpoint | Descrição | Auth |
+|--------|----------|-----------|------|
+| POST | `/simulador/simular` | Simular economia GD (12 meses) | Público |
+
+## Integrações
+
+| Método | Endpoint | Permissão |
+|--------|----------|-----------|
+| GET | `/integracoes` | `settings.view` |
+
+## Geração (Monitoramento)
+
+| Método | Endpoint | Permissão |
+|--------|----------|-----------|
+| GET | `/geracao` | `geracao.view` |
+| POST | `/geracao` | `geracao.create` |
+| GET | `/geracao/{id}` | `geracao.view` |
+| PATCH | `/geracao/{id}` | `geracao.update` |
+| DELETE | `/geracao/{id}` | `geracao.delete` |
+
+## Aprovações (Workflow)
+
+| Método | Endpoint | Permissão |
+|--------|----------|-----------|
+| GET | `/aprovacoes` | `aprovacoes.view` |
+| POST | `/aprovacoes` | `aprovacoes.create` |
+| GET | `/aprovacoes/{id}` | `aprovacoes.view` |
+| PATCH | `/aprovacoes/{id}` | `aprovacoes.update` |
+| DELETE | `/aprovacoes/{id}` | `aprovacoes.delete` |
+| POST | `/aprovacoes/{id}/review` | `aprovacoes.update` |
+
+## Push Notifications
+
+| Método | Endpoint | Permissão |
+|--------|----------|-----------|
+| POST | `/push/tokens` | JWT (qualquer) |
+| GET | `/push/tokens` | JWT (qualquer) |
+| DELETE | `/push/tokens/{token}` | JWT (qualquer) |
+| POST | `/push/send` | `notificacoes.manage` |
+
+## Marketplace
+
+| Método | Endpoint | Permissão |
+|--------|----------|-----------|
+| GET | `/marketplace/offers` | `marketplace.view` |
+| POST | `/marketplace/simulate` | `marketplace.view` |
+
+## Compliance ANEEL
+
+| Método | Endpoint | Permissão |
+|--------|----------|-----------|
+| GET | `/compliance/check` | `compliance.view` |
+| GET | `/compliance/quotas` | `compliance.view` |
+| GET | `/compliance/credits-expiration` | `compliance.view` |
+
+## Webhooks
+
+| Método | Endpoint | Permissão |
+|--------|----------|-----------|
+| GET | `/webhooks` | `settings.view` |
+| POST | `/webhooks` | `settings.update` |
+| GET | `/webhooks/{id}` | `settings.view` |
+| PATCH | `/webhooks/{id}` | `settings.update` |
+| DELETE | `/webhooks/{id}` | `settings.update` |

@@ -15,6 +15,18 @@ O EnerSync Web utiliza **TanStack Router** com file-based routing.
 |------|---------|-----------|
 | `/login` | `login.tsx` | Login com email/senha |
 | `/registro` | `registro.tsx` | Registro de novo tenant (onboarding) |
+| `/simulador` | `simulador.tsx` | Simulador público de economia GD |
+
+### Portal do Cliente (UC)
+
+| Rota | Arquivo | Descrição |
+|------|---------|-----------|
+| `/portal` | `portal/acesso.tsx` | Página de acesso via magic link |
+| `/portal/dashboard` | `portal/dashboard.tsx` | Dashboard da UC |
+| `/portal/faturas` | `portal/faturas.tsx` | Faturas da distribuidora |
+| `/portal/faturas-internas` | `portal/faturas-internas.tsx` | Faturas internas (cobrança) |
+| `/portal/creditos` | `portal/creditos.tsx` | Créditos de energia |
+| `/portal/contrato` | `portal/contrato.tsx` | Contrato ativo |
 
 ### Protegidas (requerem autenticação)
 
@@ -33,8 +45,12 @@ O EnerSync Web utiliza **TanStack Router** com file-based routing.
 | `/relatorios` | `relatorios.tsx` | Resumo financeiro + export CSV/XLSX/PDF |
 | `/notificacoes` | `notificacoes.tsx` | Lista + marcar lida + filtros + bulk actions |
 | `/audit` | `audit.tsx` | Tabela de audit log com filtros |
-| `/configuracoes` | `configuracoes.tsx` | 3 tabs: Empresa, Faturamento, Email |
-| `/tarefas` | `tarefas.tsx` | 3 cards de tarefas automatizáveis |
+| `/configuracoes` | `configuracoes.tsx` | 3 tabs: Empresa, Faturamento, Email (+ webhooks) |
+| `/tarefas` | `tarefas.tsx` | Cards de tarefas automatizáveis |
+| `/geracao` | `geracao.tsx` | Monitoramento de geração — CRUD registros |
+| `/aprovacoes` | `aprovacoes.tsx` | Workflow de aprovação — cards + review |
+| `/marketplace` | `marketplace.tsx` | Usinas com cotas disponíveis + simulação |
+| `/compliance` | `compliance.tsx` | Compliance ANEEL — verificações, cotas, créditos |
 
 ## Dashboard
 
@@ -70,3 +86,7 @@ Disponíveis em:
 - **Notificações**: marcar como lida (checkbox nos cards)
 
 Componente `BulkActionBar` aparece fixo no bottom quando há itens selecionados.
+
+## Testes Frontend
+
+O frontend utiliza **Vitest** + **Testing Library** com 16 unit tests cobrindo utils e hooks.

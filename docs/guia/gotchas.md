@@ -171,6 +171,63 @@ Inputs HTML retornam `""` para campos vazios. Pydantic rejeita `""` para dates.
 const cleanData = { ...data, date_field: data.date_field || null }
 ```
 
+### SQLAlchemy Enum valores vs nomes
+
+`SQLEnum(StrEnum)` usa **nomes** (ADMIN) por default. Para enviar valores (admin), usar `values_callable`.
+
+```python
+# ❌ Envia ADMIN, MANAGER, VIEWER
+Column(SQLEnum(UserRole))
+
+# ✅ Envia admin, manager, viewer
+Column(SQLEnum(UserRole, values_callable=lambda e: [x.value for x in e]))
+```
+
+### Performance indexes em queries com tenant_id
+
+Indexes compostos devem incluir `tenant_id` como primeira coluna para funcionar com RLS.
+
+```python
+# ✅ Index composto eficiente com RLS
+Index("ix_faturas_tenant_ref", "tenant_id", "reference_month")
+Index("ix_creditos_tenant_exp", "tenant_id", "expiration_date")
+```
+
+### Rate limiting com slowapi + proxy
+
+`get_remote_address` pega o IP do cliente. Atrás de proxy (Nginx, API Gateway), usar `X-Forwarded-For`.
+
+```python
+# ✅ Atrás de proxy
+from slowapi.util import get_remote_address
+limiter = Limiter(key_func=get_remote_address)
+# Certificar que proxy envia X-Forwarded-For
+```
+
+### Webhook HMAC signature com encoding
+
+O body deve ser serializado para bytes **antes** de calcular o HMAC. Usar `json.dumps()` com `sort_keys=True` para garantir determinismo.
+
+```python
+# ✅ Payload determinístico
+payload_bytes = json.dumps(payload, sort_keys=True, default=str).encode()
+signature = hmac.new(secret.encode(), payload_bytes, hashlib.sha256).hexdigest()
+```
+
+### Flutter Secure Storage no Android
+
+`flutter_secure_storage` requer `minSdkVersion 18+` no Android. Verificar `android/app/build.gradle`.
+
+### Sentry DSN deve ser validado antes de init
+
+Sentry SDK falha silenciosamente com DSN inválido. Validar que começa com `https://` antes de `sentry_sdk.init()`.
+
+```python
+# ✅ Validar antes
+if settings.sentry_dsn and settings.sentry_dsn.startswith("https://"):
+    sentry_sdk.init(dsn=settings.sentry_dsn)
+```
+
 ---
 
 ## Deploy

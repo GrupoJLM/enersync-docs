@@ -38,19 +38,19 @@ O EnerSync permite que empresas de gestão de GD:
 
 | Repositório | Descrição |
 |-------------|-----------|
-| [enersync-api](https://github.com/GrupoJLM/enersync-api) | Backend FastAPI — 179 testes, 25 fases completas |
-| [enersync-web](https://github.com/GrupoJLM/enersync-web) | Frontend React 19 — 16 páginas, i18n, bulk actions |
+| [enersync-api](https://github.com/GrupoJLM/enersync-api) | Backend FastAPI — 242 testes, 35 fases completas |
+| [enersync-web](https://github.com/GrupoJLM/enersync-web) | Frontend React 19 — 23 páginas, i18n, bulk actions, 16 testes Vitest |
 | [enersync-mobile](https://github.com/GrupoJLM/enersync-mobile) | App Flutter — Login + Dashboard |
 
 ---
 
 ## Números
 
-- :test_tube: **179 testes** backend passando
+- :test_tube: **242 testes** backend passando
 - :shield: **44 permissões** RBAC (3 roles)
-- :rocket: **25 fases** de desenvolvimento concluídas
+- :rocket: **35 fases** de desenvolvimento concluídas
 - :earth_americas: **i18n** pt-BR e en-US
-- :page_facing_up: **16 páginas** no frontend web
+- :page_facing_up: **23 páginas** no frontend web + **7 páginas** portal
 
 ---
 

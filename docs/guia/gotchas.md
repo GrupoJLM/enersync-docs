@@ -218,6 +218,61 @@ signature = hmac.new(secret.encode(), payload_bytes, hashlib.sha256).hexdigest()
 
 `flutter_secure_storage` requer `minSdkVersion 18+` no Android. Verificar `android/app/build.gradle`.
 
+### useRef sem argumento inicial no CI
+
+TypeScript strict no CI (diferente do local) exige argumento inicial em `useRef`. Sempre passar `undefined`.
+
+```typescript
+// ❌ Falha no CI
+const ref = useRef<ReturnType<typeof setTimeout>>()
+
+// ✅ Funciona em todos os ambientes
+const ref = useRef<ReturnType<typeof setTimeout> | undefined>(undefined)
+```
+
+### React Compiler rejeita ref.current no render
+
+O React Compiler trata `ref.current = value` no corpo do componente como "acesso a ref durante render". Mover para `useEffect`.
+
+```typescript
+// ❌ React Compiler error
+const callbackRef = useRef(callback)
+callbackRef.current = callback  // no render body
+
+// ✅ Dentro de useEffect
+useEffect(() => {
+  callbackRef.current = callback
+}, [callback])
+```
+
+### Array.isArray guard para dados de API
+
+Dados de API podem retornar formato inesperado (string, objeto). Usar `Array.isArray()` antes de `.map()`.
+
+```typescript
+// ❌ Crash se webhooks não for array
+!webhooks?.length
+
+// ✅ Guard defensivo
+!Array.isArray(webhooks) || !webhooks.length
+```
+
+### react-joyride peer dependency
+
+react-joyride espera React 18. Com React 19, usar `.npmrc` com `legacy-peer-deps=true`.
+
+### oklch colors e Tailwind v4
+
+Variáveis CSS do tema usam `oklch()`. Cores como `hsl()` do shadcn default não funcionam — converter para oklch.
+
+### useMatches breadcrumbs
+
+`useMatches()` do TanStack Router retorna todas as rotas matched. Filtrar `pathname !== '/'` e `pathname !== '/_authenticated'` para breadcrumbs limpos.
+
+### Security headers — CloudFront vs nginx
+
+O frontend em produção usa CloudFront + S3 (estático). O `nginx.conf` no Dockerfile só é usado em Docker local. Para produção, configurar security headers via **CloudFront Response Headers Policy**.
+
 ### Sentry DSN deve ser validado antes de init
 
 Sentry SDK falha silenciosamente com DSN inválido. Validar que começa com `https://` antes de `sentry_sdk.init()`.

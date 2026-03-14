@@ -9,6 +9,64 @@ Registro de todas as mudanças significativas do projeto EnerSync, organizadas p
 
 ---
 
+## [Fase 40] — Qualidade, UX e Segurança
+
+**276 testes backend** | Março 2026
+
+### Adicionado
+- ErrorBoundary (React class component) envolvendo rotas autenticadas — previne crash total da página
+- Dark mode toggle no header com `next-themes` (ThemeProvider + Sun/Moon icon)
+- DebouncedInput no DataTable — debounce de 300ms no search para reduzir re-renders
+- Code splitting do Recharts via `manualChunks` no Vite — dashboard chunk de 505KB → 110KB, recharts em chunk separado de 409KB
+- Security headers no nginx.conf (X-Content-Type-Options, X-Frame-Options, X-XSS-Protection, Referrer-Policy, Permissions-Policy) — aplica apenas em Docker local
+- Hook `useDebounce` genérico em `src/hooks/use-debounce.ts`
+
+### Corrigido
+- `TypeError: s.map is not a function` na página `/configuracoes` — guard `Array.isArray(webhooks)` adicionado
+- CI build error: `useRef` sem argumento inicial — adicionado `undefined` como valor inicial
+- CI lint error: React Compiler rejeitava `onChangeRef.current = onChange` no render — movido para `useEffect`
+
+---
+
+## [Fase 39] — UI/UX Redesign
+
+Março 2026
+
+### Adicionado
+- Sidebar colapsável com ícones (Lucide) e tooltips quando fechada
+- Header com breadcrumbs via `useMatches()` do TanStack Router
+- StatCards reutilizáveis para dashboard e outras páginas
+- Guided tour com react-joyride (onboarding interativo)
+- Avatar com iniciais do usuário no header
+- Tema oklch com variáveis CSS
+- Empty states com ícone Inbox no DataTable
+- `.npmrc` com `legacy-peer-deps=true` (react-joyride peer dep)
+
+---
+
+## [Fase 36–38] — Billing, Geração, Aprovações
+
+**276 testes** | Março 2026
+
+### Adicionado (Fase 36 — Assinatura e Billing)
+- Integração Asaas sandbox (PIX, cartão, boleto)
+- Planos de assinatura mensal/anual com desconto
+- Checkout flow completo
+- Webhook de pagamento com validação de token
+- Portal do assinante
+- Toggle mensal/anual no frontend e mobile (Fase 36.1)
+- Asaas webhook com ECS task def rev 4 (Fase 36.2)
+
+### Adicionado (Fase 37 — Geração)
+- Módulo de geração de energia com leituras e histórico
+- Página `/geracao` no frontend
+
+### Adicionado (Fase 38 — Aprovações)
+- Workflow de aprovação multi-nível
+- Página `/aprovacoes` no frontend
+
+---
+
 ## [Fase 35.1] — Melhorias de Robustez
 
 **242 testes** | Março 2026

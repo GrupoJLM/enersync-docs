@@ -80,3 +80,54 @@ Cada página segue o padrão:
 - Traduções em `lib/i18n/pt-BR.json` e `lib/i18n/en-US.json`
 - Uso: `intl.formatMessage({ id: 'chave' })`
 - Seletor de idioma no header (Globe icon)
+
+## Dark Mode (next-themes)
+
+- `ThemeProvider` envolve toda a app em `main.tsx` (`attribute="class"`, `defaultTheme="light"`)
+- Toggle no header com ícones Sun/Moon (transição CSS com rotate/scale)
+- `useTheme()` para acessar/alterar tema
+- Sonner (toasts) já integrado com next-themes
+
+## ErrorBoundary
+
+- Class component React em `error-boundary.tsx`
+- Envolve `<Outlet />` no `_authenticated.tsx`
+- Fallback styled com ícone AlertTriangle + botão "Tentar novamente"
+- Captura erros de render sem derrubar toda a página
+
+## StatCards
+
+- Componente reutilizável para KPIs em `stat-cards.tsx`
+- Aceita array de `{ title, value, icon, trend? }`
+- Grid responsivo (2-4 colunas)
+
+## DataTable — DebouncedInput
+
+- Input com debounce de 300ms para busca server-side
+- Usa `useRef` para timer e callback (evita re-renders desnecessários)
+- `onChangeRef.current` atualizado via `useEffect` (requisito React Compiler)
+
+## Sidebar
+
+- Colapsável com estado persistido
+- Ícones Lucide em cada item
+- Tooltip com label quando colapsada
+
+## Header Breadcrumbs
+
+- `useMatches()` do TanStack Router para extrair rota atual
+- Map de segmento → label em `ROUTE_LABELS`
+- Último item sem link (rota atual), anteriores clicáveis
+
+## Guided Tour
+
+- `react-joyride` para onboarding interativo
+- Steps definidos em `lib/tour.ts`
+- Estado gerenciado em `hooks/use-tour.ts`
+- `.npmrc` com `legacy-peer-deps=true` por incompatibilidade React 19
+
+## Code Splitting
+
+- Recharts extraído via `manualChunks` no `vite.config.ts`
+- Dashboard chunk: 505KB → 110KB (recharts em chunk separado de 409KB)
+- Lazy routes via TanStack Router (`*.lazy.tsx`)

@@ -1,13 +1,13 @@
 # Roadmap
 
-**35 fases** do EnerSync foram concluídas (+ 1 pendente: microserviço externo).
+**40 fases** do EnerSync foram concluídas (+ 1 pendente: microserviço externo).
 
 ## Resumo
 
-- :test_tube: **242 testes** backend passando
+- :test_tube: **276 testes** backend passando
 - :shield: **44 permissões** RBAC (3 roles)
-- :rocket: **35 fases** implementadas (26 pendente — escopo externo)
-- :package: Stack completa: Auth, RBAC, CRUD, Otimizador, Faturamento, Audit, Notificações, Dashboard, Import/Export, Filtros, PDF, Email, Cron, Onboarding, Observabilidade, Bulk, i18n, Portal, Simulador, Integrações, Geração, Aprovações, Push, Marketplace, Compliance, Webhooks, Rate Limiting, Mobile Flutter
+- :rocket: **40 fases** implementadas (26 pendente — escopo externo)
+- :package: Stack completa: Auth, RBAC, CRUD, Otimizador, Faturamento, Audit, Notificações, Dashboard, Import/Export, Filtros, PDF, Email, Cron, Onboarding, Observabilidade, Bulk, i18n, Portal, Simulador, Integrações, Geração, Aprovações, Push, Marketplace, Compliance, Webhooks, Rate Limiting, Mobile Flutter, Assinatura/Billing, UI/UX Redesign, Qualidade/Segurança
 
 ---
 
@@ -120,3 +120,24 @@ Flutter app (login + dashboard). Riverpod, GoRouter, Dio. **225 testes**.
 
 ### Fase 35.1: Melhorias de Robustez :white_check_mark:
 Rate limiting (slowapi). Webhook system (HMAC-SHA256). Performance indexes. Monthly report task. Frontend Vitest. Webhook management UI. **242 testes**.
+
+### Fase 36: Assinatura e Billing :white_check_mark:
+Integração Asaas (sandbox). Planos mensal/anual. Checkout PIX/cartão/boleto. Webhook de pagamento. Portal do assinante. **254 testes**.
+
+### Fase 36.1: Billing Anual :white_check_mark:
+Toggle mensal/anual no frontend e mobile. Cálculo de desconto anual. **254 testes**.
+
+### Fase 36.2: Asaas Webhook :white_check_mark:
+Webhook de pagamento Asaas com validação de token. ECS task def rev 4 com secrets. **276 testes**.
+
+### Fase 37: Geração :white_check_mark:
+Módulo de geração de energia com leituras e histórico. Página `/geracao` no frontend. **276 testes**.
+
+### Fase 38: Aprovações :white_check_mark:
+Workflow de aprovação multi-nível. Página `/aprovacoes` no frontend. **276 testes**.
+
+### Fase 39: UI/UX Redesign :white_check_mark:
+Sidebar colapsável com ícones. Header com breadcrumbs (useMatches). StatCards reutilizáveis. Guided tour (react-joyride). Avatar com iniciais. Tema oklch. Empty states com ícone Inbox. .npmrc para peer deps.
+
+### Fase 40: Qualidade, UX e Segurança :white_check_mark:
+ErrorBoundary (class component) nas rotas autenticadas. Dark mode toggle (next-themes + Sun/Moon). Debounce 300ms no search do DataTable. Code splitting recharts (manualChunks: 505KB→110KB+409KB). Fix Array.isArray guard no configuracoes (s.map crash). Security headers no nginx.conf (docker local).

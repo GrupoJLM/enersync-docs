@@ -48,24 +48,30 @@ energy-saas/
 
 ```
 apps/web/
+├── .npmrc                              # legacy-peer-deps=true (react-joyride)
 ├── package.json                        # React 19, Vite 7, TanStack
-├── vite.config.ts                      # proxy /api→:8000, TanStack Router plugin
+├── vite.config.ts                      # proxy /api→:8000, TanStack Router plugin, manualChunks
 ├── Dockerfile                          # node:22 build → nginx serve
-├── nginx.conf                          # gzip + proxy + SPA fallback
+├── nginx.conf                          # gzip + proxy + SPA fallback + security headers
 └── src/
-    ├── main.tsx                         # IntlProvider + QueryClient + Auth + Router
-    ├── globals.css                      # Tailwind v4 + shadcn theme
+    ├── main.tsx                         # ThemeProvider + IntlProvider + QueryClient + Auth + Router
+    ├── globals.css                      # Tailwind v4 + oklch theme
     ├── lib/
     │   ├── api.ts                       # Axios + JWT interceptors
     │   ├── auth.tsx                     # AuthProvider + useAuth()
     │   ├── types.ts                     # TS types espelhando schemas Python
     │   ├── utils.ts                     # cn, formatCurrency, formatDate, etc.
+    │   ├── tour.ts                      # Guided tour steps (react-joyride)
     │   └── i18n/                        # react-intl (pt-BR/en-US)
-    ├── hooks/                           # 16 hooks TanStack Query
+    ├── hooks/                           # 18 hooks TanStack Query
+    │   ├── use-debounce.ts              # Generic useDebounce hook
+    │   └── use-tour.ts                  # Tour state management
     ├── components/
     │   ├── ui/                          # 12 shadcn components
-    │   ├── layout/                      # app-layout, sidebar, header
-    │   ├── data-table.tsx               # Genérico com paginação + seleção
+    │   ├── layout/                      # app-layout, sidebar (colapsável), header (breadcrumbs + dark mode)
+    │   ├── data-table.tsx               # Genérico com paginação + seleção + DebouncedInput
+    │   ├── stat-cards.tsx               # Cards reutilizáveis para KPIs
+    │   ├── error-boundary.tsx           # React ErrorBoundary (class component)
     │   ├── confirm-dialog.tsx
     │   ├── page-header.tsx
     │   └── bulk-action-bar.tsx          # Barra flutuante para ações em lote
@@ -73,8 +79,8 @@ apps/web/
         ├── __root.tsx
         ├── login.tsx
         ├── registro.tsx                 # Onboarding
-        ├── _authenticated.tsx           # Auth guard
-        └── _authenticated/              # 16 páginas protegidas
+        ├── _authenticated.tsx           # Auth guard + ErrorBoundary
+        └── _authenticated/              # 26 páginas protegidas
 ```
 
 ## Mobile (`enersync-mobile/`)

@@ -24,7 +24,8 @@ energy-saas/
 │   ├── Dockerfile                      # python:3.12-slim + uv
 │   ├── entrypoint.sh                   # alembic upgrade + uvicorn
 │   ├── alembic/
-│   │   └── versions/                   # 9 migrations (0001-0009)
+│   │   └── versions/                   # 16 migrations (0001-0016)
+│   │       └── 0016_webhook_delivery_logs.py
 │   └── src/energy_saas/
 │       ├── config.py                   # Settings (pydantic-settings)
 │       ├── database.py                 # AsyncEngine + sessionmaker

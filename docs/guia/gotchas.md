@@ -171,6 +171,32 @@ Inputs HTML retornam `""` para campos vazios. Pydantic rejeita `""` para dates.
 const cleanData = { ...data, date_field: data.date_field || null }
 ```
 
+### Alembic + asyncpg: sa.Enum vs postgresql.ENUM
+
+`sa.Enum(create_type=False)` **não funciona** com asyncpg — o evento `_on_table_create` ainda dispara `CREATE TYPE`. Usar `postgresql.ENUM(create_type=False)`.
+
+```python
+# ❌ Ainda cria o TYPE com asyncpg
+sa.Enum("a", "b", name="meu_enum", create_type=False)
+
+# ✅ Correto
+from sqlalchemy.dialects.postgresql import ENUM as pgENUM
+pgENUM("a", "b", name="meu_enum", create_type=False)
+```
+
+Além disso, `sa.Enum.create(checkfirst=True)` não é confiável com asyncpg. Para criação idempotente de enums em migrations Alembic, usar bloco raw SQL:
+
+```python
+op.execute("""
+DO $$
+BEGIN
+    IF NOT EXISTS (SELECT 1 FROM pg_type WHERE typname = 'meu_enum') THEN
+        CREATE TYPE meu_enum AS ENUM ('a', 'b');
+    END IF;
+END$$;
+""")
+```
+
 ### SQLAlchemy Enum valores vs nomes
 
 `SQLEnum(StrEnum)` usa **nomes** (ADMIN) por default. Para enviar valores (admin), usar `values_callable`.

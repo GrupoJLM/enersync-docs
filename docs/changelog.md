@@ -9,6 +9,14 @@ Registro de todas as mudanças significativas do projeto EnerSync, organizadas p
 
 ---
 
+## 2026-03-15
+
+### Corrigido
+- **Migration 0016 — criação de enum com asyncpg**: `sa.Enum(create_type=False)` ainda disparava `CREATE TYPE` via asyncpg. Corrigido usando `postgresql.ENUM(create_type=False)` + bloco raw SQL `DO $$ IF NOT EXISTS $$` para criação idempotente do enum `webhook_delivery_status` em `0016_webhook_delivery_logs.py`.
+- **Deploy API para AWS ECS**: resolvido após 6+ deploys falhos causados pela criação duplicada do enum no banco de produção. Com a migration corrigida, o `alembic upgrade head` executado pelo `entrypoint.sh` passou a rodar sem erros.
+
+---
+
 ## Backlog — Março 2026
 
 ### CI & Qualidade

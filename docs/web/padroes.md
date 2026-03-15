@@ -131,3 +131,17 @@ Cada página segue o padrão:
 - Recharts extraído via `manualChunks` no `vite.config.ts`
 - Dashboard chunk: 505KB → 110KB (recharts em chunk separado de 409KB)
 - Lazy routes via TanStack Router (`*.lazy.tsx`)
+
+## Dashboard Drag & Drop (@dnd-kit)
+
+KPI cards são reordenáveis via `@dnd-kit/sortable`. A ordem é persistida em `localStorage` via `useDashboardLayout` hook. Cada card tem um `GripVertical` drag handle. Botão "Resetar layout" restaura a ordem padrão.
+
+## i18n Completo (react-intl)
+
+350+ chaves de tradução em `src/lib/i18n/pt-BR.json` e `en-US.json`. Organização por domínio:
+- `common.*` — botões, labels genéricos
+- `dashboard.*` — KPIs, gráficos, saudações
+- `{entidade}.*` — CRUD completo (title, description, create, edit, delete, errors, toasts)
+- `auth.*`, `settings.*`, `tasks.*` — funcionalidades transversais
+
+Sidebar e header já usam `useIntl()`. Páginas podem migrar incrementalmente.

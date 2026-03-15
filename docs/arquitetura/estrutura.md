@@ -41,6 +41,8 @@ energy-saas/
 │       ├── schemas/                    # Pydantic v2 (Read/Create/Update)
 │       ├── services/                   # 20+ services (funções async)
 │       └── routers/                    # 17 routers FastAPI
+└── dependencies:
+    └── firebase-admin                  # Push notifications via FCM
 └── tests/                             # 179 testes (23 arquivos)
 ```
 
@@ -65,6 +67,7 @@ apps/web/
     │   └── i18n/                        # react-intl (pt-BR/en-US)
     ├── hooks/                           # 18 hooks TanStack Query
     │   ├── use-debounce.ts              # Generic useDebounce hook
+    │   ├── use-dashboard-layout.ts      # Hook para ordem dos KPIs com localStorage
     │   └── use-tour.ts                  # Tour state management
     ├── components/
     │   ├── ui/                          # 12 shadcn components
@@ -94,6 +97,19 @@ enersync-mobile/
 │   │   ├── config/                      # API config, theme
 │   │   ├── network/                     # Dio client + JWT interceptor
 │   │   └── storage/                     # Flutter Secure Storage
+│   ├── models/
+│   │   └── dashboard_charts.dart        # Modelo para dados de gráficos
+│   ├── screens/
+│   │   ├── dashboard/
+│   │   │   └── dashboard_charts_widget.dart  # Widget de gráficos fl_chart
+│   │   ├── contratos/
+│   │   │   └── contrato_detail_screen.dart   # Tela detalhe contrato
+│   │   ├── creditos/
+│   │   │   └── credito_detail_screen.dart    # Tela detalhe crédito
+│   │   └── faturas/
+│   │       └── fatura_detail_screen.dart     # Tela detalhe fatura
+│   ├── services/
+│   │   └── push_token_service.dart      # Serviço de tokens FCM
 │   ├── features/
 │   │   ├── auth/                        # Login + providers
 │   │   └── dashboard/                   # Dashboard screen

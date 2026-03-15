@@ -9,6 +9,50 @@ Registro de todas as mudanças significativas do projeto EnerSync, organizadas p
 
 ---
 
+## Backlog — Março 2026
+
+### CI & Qualidade
+- Fix: test_list_tasks (7 tasks com retry_failed_webhooks)
+- Fix: MissingGreenlet no webhook retry endpoint (db.refresh após commit)
+- Fix: ruff B008 lint em webhook router Query defaults
+- Fix: pip-audit ecdsa CVE ignorada (backend cryptography)
+- Fix: npm vulnerabilities (happy-dom, undici, hono)
+
+### CloudFront Security Headers
+- Response Headers Policy com X-Content-Type-Options, X-Frame-Options, HSTS, Permissions-Policy
+- Terraform aws_cloudfront_response_headers_policy
+
+### E2E Coverage
+- 5 novos spec files: configuracoes, faturamento, usuarios, notificacoes, relatorios
+- Total: 19 specs, 82 tests Playwright
+
+### Dependency Scanning
+- npm audit no CI (web)
+- pip-audit no CI (api)
+
+### Multi-idioma
+- Frontend: 76→350+ keys em pt-BR.json e en-US.json
+- Backend: 11→33 keys com format string support (**kwargs)
+
+### Mobile Expandir
+- Dashboard charts com fl_chart (consumo + faturamento)
+- Detail screens: contratos, creditos, faturas
+- Push token service (preparação FCM)
+- Total: 15 telas, 16 testes
+
+### Dashboard Personalizável
+- @dnd-kit sortable KPI cards
+- useDashboardLayout hook com localStorage
+- GripVertical drag handle + reset button
+
+### Push Notifications (FCM)
+- Backend: firebase-admin com lazy init
+- Token cleanup em UnregisteredError
+- Graceful degradation sem Firebase configurado
+- 10 testes de push
+
+---
+
 ## [Fase 40] — Qualidade, UX e Segurança
 
 **276 testes backend** | Março 2026

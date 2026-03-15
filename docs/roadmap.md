@@ -141,3 +141,21 @@ Sidebar colapsável com ícones. Header com breadcrumbs (useMatches). StatCards 
 
 ### Fase 40: Qualidade, UX e Segurança :white_check_mark:
 ErrorBoundary (class component) nas rotas autenticadas. Dark mode toggle (next-themes + Sun/Moon). Debounce 300ms no search do DataTable. Code splitting recharts (manualChunks: 505KB→110KB+409KB). Fix Array.isArray guard no configuracoes (s.map crash). Security headers no nginx.conf (docker local).
+
+### Backlog (Março 2026)
+
+Itens de melhoria executados após Fase 40:
+
+| Item | Status | Detalhes |
+|------|--------|----------|
+| CI API fix | ✅ | Corrigidos 3 bugs (test_list_tasks, MissingGreenlet webhook, ruff B008), pip-audit ecdsa ignorada |
+| CloudFront Security Headers | ✅ | Response Headers Policy com OWASP headers (HSTS, X-Frame, CSP) |
+| E2E Coverage | ✅ | 12→19 specs, 58→82 tests (configuracoes, faturamento, usuarios, notificacoes, relatorios) |
+| Dependency Scanning | ✅ | npm audit + pip-audit no CI (ambos repos) |
+| Multi-idioma | ✅ | Frontend: 76→350+ keys pt-BR/en-US. Backend: 11→33 keys com format strings |
+| Mobile Expandir | ✅ | Dashboard charts (fl_chart), detail screens (contratos/creditos/faturas), push token service |
+| Dashboard Personalizável | ✅ | @dnd-kit sortable KPIs, localStorage persistence, reset layout |
+| Push Notifications (FCM) | ✅ | firebase-admin backend, lazy init, token cleanup, graceful no-config |
+| Push Nativo Mobile | ⏳ | Requer google-services.json + firebase_messaging Flutter |
+| Web Push | ⏳ | Requer VAPID keys + Service Worker |
+| Monitoring (Web Vitals) | ⏳ | Depende de OpenTelemetry infra |

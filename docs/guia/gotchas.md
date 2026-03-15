@@ -319,3 +319,19 @@ def next_month():
     _month_counter += 1
     return f"2024-{_month_counter:02d}"
 ```
+
+### SQLAlchemy MissingGreenlet após db.commit()
+
+Após `await db.commit()`, a sessão expira os objetos. Acessar atributos lazy (como `updated_at`) causa `MissingGreenlet`. Solução: `await db.refresh(obj)` antes de retornar o objeto na response.
+
+### pip-audit ecdsa CVE-2024-23342
+
+`ecdsa` é dependência transitiva de `python-jose`. O CVE é sobre timing side-channel no ECDSA puro Python. Como usamos `python-jose[cryptography]` (backend OpenSSL), não somos afetados. Ignorar com `--ignore-vuln CVE-2024-23342` no CI.
+
+### ruff B008 com Query() e tipos Enum
+
+`ruff` flageia `Query(default=None)` como B008 quando o tipo do parâmetro é um Enum (ex: `WebhookDeliveryStatus | None`). Outros tipos como `str | None` e `int` não são flaggeados. Usar `# noqa: B008` (padrão FastAPI).
+
+### Firebase Admin sem credenciais
+
+`firebase-admin` precisa de credenciais para enviar push. Se `FIREBASE_CREDENTIALS_JSON` e `GOOGLE_APPLICATION_CREDENTIALS` não estiverem configurados, o serviço deve logar warning e retornar sem crash. Usar lazy initialization.
